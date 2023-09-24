@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Registration Page</title>
+    <style>
+        body {
+            font-family: Arial, Helvetica, sans-serif;
+            text-align: center;
+        }
+
+        .container {
+            width: 300px;
+            margin: 0 auto;
+        }
+
+        input[type="text"],
+        input[type="password"],
+        input[type="email"] {
+            width: 100%;
+            padding: 10px;
+            margin: 10px 0;
+        }
+
+        button {
+            background-color: #007bff;
+            color: #fff;
+            padding: 10px 20px;
+            border: none;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background-color: #0056b3;
+        }
+
+        .error {
+            color: red;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h2>Registration</h2>
+        <form id="registrationForm" onsubmit="return validateForm()">
+            <input type="text" id="username" placeholder="Username" required>
+            <input type="password" id="password" placeholder="Password" required>
+            <input type="password" id="confirmPassword" placeholder="Confirm Password" required>
+            <input type="email" id="email" placeholder="Email" required>
+            <input type="email" id="confirmEmail" placeholder="Confirm Email" required>
+            <p class="error" id="errorMessage"></p>
+            <button type="submit">Register</button>
+        </form>
+    </div>
+
+    <script>
+        function validateForm() {
+            // Get form inputs
+            const username = document.getElementById("username").value;
+            const password = document.getElementById("password").value;
+            const confirmPassword = document.getElementById("confirmPassword").value;
+            const email = document.getElementById("email").value;
+            const confirmEmail = document.getElementById("confirmEmail").value;
+
+            // Password validation (capital letter, lowercase letter, number, special character)
+            const passwordRegex = /^(?=.*[A-Z])(?=.*[a-z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/;
+
+            if (password !== confirmPassword) {
+                document.getElementById("errorMessage").textContent = "Passwords do not match.";
+                return false;
+            } else if (!password.match(passwordRegex)) {
+                document.getElementById("errorMessage").textContent = "Password must have a capital letter, lowercase letter, a number, and a special character.";
+                return false;
+            }
+
+            // Email validation
+            const emailRegex = /^[A-Za-z0-9._%-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,4}$/;
+
+            if (email !== confirmEmail) {
+                document.getElementById("errorMessage").textContent = "Emails do not match.";
+                return false;
+            } else if (!email.match(emailRegex)) {
+                document.getElementById("errorMessage").textContent = "Invalid email format.";
+                return false;
+            }
+
+            // Form is valid, you can submit it here or redirect to another page
+            return true;
+        }
+    </script>
+</body>
+</html>

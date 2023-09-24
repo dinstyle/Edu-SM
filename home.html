@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Home Page</title>
+    <style>
+        body {
+            font-family: Arial, Helvetica, sans-serif;
+            text-align: center;
+        }
+
+        .container {
+            width: 300px;
+            margin: 0 auto;
+        }
+
+        h2 {
+            margin-bottom: 20px;
+        }
+
+        p {
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h2>Welcome to the Home Page</h2>
+        <p>Username: <span id="username"></span></p>
+        <p>Email: <span id="email"></span></p>
+    </div>
+
+    <script>
+        // Assume you have stored the username and email in session storage or cookies
+        const username = sessionStorage.getItem("username");
+        const email = sessionStorage.getItem("email");
+
+        if (username && email) {
+            document.getElementById("username").textContent = username;
+            document.getElementById("email").textContent = email;
+        } else {
+            // If the user is not logged in, you can redirect them to the login page
+            window.location.href = "index.html";
+        }
+    </script>
+</body>
+</html>
